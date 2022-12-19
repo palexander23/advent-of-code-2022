@@ -1,0 +1,7 @@
+{
+    "rust-analyzer.inlayHints.expressionAdjustmentHints.enable": "never",
+    "rust-analyzer.inlayHints.lifetimeElisionHints.enable": "never",
+    "rust-analyzer.inlayHints.bindingModeHints.enable": true,
+    "rust-analyzer.inlayHints.lifetimeElisionHints.useParameterNames": false,
+    "editor.formatOnSave": true
+}
