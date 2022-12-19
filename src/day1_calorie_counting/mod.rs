@@ -1,6 +1,6 @@
 
-pub fn process_data(data_lines: Vec<String>) -> (u32, u32) {
-    let mut calorie_sums: Vec<u32> = vec![];
+pub fn process_data(data_lines: Vec<String>) -> (i32, i32) {
+    let mut calorie_sums: Vec<i32> = vec![];
     let mut current_sum = 0;
 
     for line in data_lines {
@@ -10,7 +10,7 @@ pub fn process_data(data_lines: Vec<String>) -> (u32, u32) {
             continue;
         }
 
-        current_sum += line.parse::<u32>().unwrap();
+        current_sum += line.parse::<i32>().unwrap();
     }
 
     let top_calories = calorie_sums.iter().max().unwrap().clone();
