@@ -1,6 +1,9 @@
 use std::{fs::File, io::{BufReader, BufRead}, process::exit};
 
 pub fn run_puzzle_script(puzzle_script: fn(Vec<String>)->(i32,i32), expected_outputs: (i32, i32), folder_name: String) {
+    println!("\n\n*----------------------------------------*");
+    println!("* {}", folder_name);
+    println!("*----------------------------------------*");
     print!("Loading Test Data...");
     let test_data_lines_vec = get_file_line_vec(&format!("src/{}/test_data.txt", folder_name)).expect("Could not open test_data.txt");
     let real_data_lines_vec = get_file_line_vec(&format!("src/{}/real_data.txt", folder_name)).expect("Could not open real_data.txt");
