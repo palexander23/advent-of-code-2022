@@ -26,7 +26,7 @@ fn main() {
 
     run_puzzle_script(
         day4_camp_cleanup::process_data,
-        (0, 0),
+        (2, 0),
         "day4_camp_cleanup".to_string(),
     );
 }
