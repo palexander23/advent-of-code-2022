@@ -4,6 +4,7 @@ mod day1_calorie_counting;
 mod day2_rock_paper_scissors;
 mod day3_rucksack_reorganization;
 mod day4_camp_cleanup;
+mod day5_supply_stacks;
 
 fn main() {
     run_puzzle_script(
@@ -28,5 +29,11 @@ fn main() {
         day4_camp_cleanup::process_data,
         ("2".to_string(), "4".to_string()),
         "day4_camp_cleanup".to_string(),
+    );
+
+    run_puzzle_script(
+        day5_supply_stacks::process_data,
+        ("0".to_string(), "0".to_string()),
+        "day5_supply_stacks".to_string(),
     );
 }
