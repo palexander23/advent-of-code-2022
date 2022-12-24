@@ -15,15 +15,15 @@ use itertools::Itertools;
 #[derive(Debug)]
 struct Move {
     /// The starting Stack
-    origin: u32,
+    origin: usize,
     /// The Destination Stack
-    target: u32,
+    target: usize,
     /// The number of crates to move from start to destination
     crates: u32,
 }
 
 impl Move {
-    fn new(origin: u32, target: u32, crates: u32) -> Self {
+    fn new(origin: usize, target: usize, crates: u32) -> Self {
         Move {
             origin,
             target,
@@ -36,10 +36,28 @@ pub fn process_data(data_lines: Vec<String>) -> (String, String) {
     // Split the input file into definitions for the stack and movements.
     let (stack_def, moves_def) = data_lines.split(|l| l == "").next_tuple().unwrap();
 
-    let stacks_vec = generate_stacks_vec(stack_def);
+    // Read in the input data
+    let mut stacks_vec = generate_stacks_vec(stack_def);
     let moves_vec = generate_moves_vec(moves_def);
 
-    ("1".to_string(), "1".to_string())
+    // Run the the process
+    for m in moves_vec {
+        for _ in 0..m.crates {
+            if let Some(c) = stacks_vec[m.origin - 1].pop() {
+                stacks_vec[m.target - 1].push(c)
+            }
+        }
+    }
+
+    // Collect the outputs
+    let mut part1_output_vec = vec![];
+    for stack in stacks_vec {
+        part1_output_vec.push(stack[stack.len() - 1]);
+    }
+
+    let part1_output_str: String = part1_output_vec.into_iter().collect();
+
+    (part1_output_str, "0".to_string())
 }
 
 /// Generate the vectors defining the stack of crates.
@@ -52,7 +70,13 @@ fn generate_stacks_vec(stacks_ref: &[String]) -> Vec<Vec<char>> {
     let mut stacks_vec = vec![vec![]; num_stacks];
 
     // Remove the last line containing the labels at the bottom of the stack definition
-    let stacks_without_labels = stacks_ref.split_last().unwrap().1;
+    let mut stacks_without_labels: Vec<&String> = stacks_ref
+        .split_last()
+        .unwrap()
+        .1
+        .into_iter()
+        .rev()
+        .collect();
 
     // Fill the stacks from the state given in stacks_ref
     // For each line, iterate through the letters (found by indexing every 4th point after 1)
@@ -93,8 +117,8 @@ fn generate_moves_vec(moves_def: &[String]) -> Vec<Move> {
         .map(|l| {
             let l_chars: Vec<char> = l.chars().collect();
             Move::new(
-                l_chars[12] as u32 - 48,
-                l_chars[17] as u32 - 48,
+                l_chars[12] as usize - 48,
+                l_chars[17] as usize - 48,
                 l_chars[5] as u32 - 48,
             )
         })

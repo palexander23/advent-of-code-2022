@@ -33,7 +33,7 @@ fn main() {
 
     run_puzzle_script(
         day5_supply_stacks::process_data,
-        ("0".to_string(), "0".to_string()),
+        ("CMZ".to_string(), "0".to_string()),
         "day5_supply_stacks".to_string(),
     );
 }
