@@ -1,7 +1,7 @@
 use lazy_static::lazy_static;
 use regex::Regex;
 
-pub fn process_data(data_lines: Vec<String>) -> (i32, i32) {
+pub fn process_data(data_lines: Vec<String>) -> (String, String) {
     // Convert the incoming strings to integer ranges
     let ranges_vec: Vec<((i32, i32), (i32, i32))> = data_lines
         .iter()
@@ -28,7 +28,7 @@ pub fn process_data(data_lines: Vec<String>) -> (i32, i32) {
         .map(|b| b as i32)
         .sum();
 
-    (contains_sum, overlaps_sum)
+    (contains_sum.to_string(), overlaps_sum.to_string())
 }
 
 fn get_int_ranges_from_input_line(line: &str) -> ((i32, i32), (i32, i32)) {

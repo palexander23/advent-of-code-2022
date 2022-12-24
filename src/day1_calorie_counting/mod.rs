@@ -1,5 +1,4 @@
-
-pub fn process_data(data_lines: Vec<String>) -> (i32, i32) {
+pub fn process_data(data_lines: Vec<String>) -> (String, String) {
     let mut calorie_sums: Vec<i32> = vec![];
     let mut current_sum = 0;
 
@@ -26,6 +25,5 @@ pub fn process_data(data_lines: Vec<String>) -> (i32, i32) {
         }
     }
 
-    return (top_calories, top_3_calories_sum);
+    return (top_calories.to_string(), top_3_calories_sum.to_string());
 }
-

@@ -1,6 +1,6 @@
 use std::char;
 
-pub fn process_data(data_lines: Vec<String>) -> (i32, i32) {
+pub fn process_data(data_lines: Vec<String>) -> (String, String) {
     // Declare a vector to hold the shared item in each line
     let mut shared_char_vec = vec!['@'; data_lines.len()];
 
@@ -36,7 +36,7 @@ pub fn process_data(data_lines: Vec<String>) -> (i32, i32) {
             panic!("Found a group with no common character!")
         })
         .sum();
-    (part1_score_sum, part2_score_sum)
+    (part1_score_sum.to_string(), part2_score_sum.to_string())
 }
 
 fn get_char_priority(c: char) -> i32 {
