@@ -10,6 +10,8 @@
 //! containing the important numbers for the movement.
 
 use itertools::Itertools;
+use lazy_static::lazy_static;
+use regex::Regex;
 
 /// A struct defining a single operation moving 1 or more crates from one stack to another
 #[derive(Debug)]
@@ -70,7 +72,7 @@ fn generate_stacks_vec(stacks_ref: &[String]) -> Vec<Vec<char>> {
     let mut stacks_vec = vec![vec![]; num_stacks];
 
     // Remove the last line containing the labels at the bottom of the stack definition
-    let mut stacks_without_labels: Vec<&String> = stacks_ref
+    let stacks_without_labels: Vec<&String> = stacks_ref
         .split_last()
         .unwrap()
         .1
@@ -112,14 +114,17 @@ fn get_number_of_stacks(stack_labels_str: &str) -> usize {
 /// Takes in the part of the input file defining the moves.
 /// Returns a vec of `Move`s to be run on the stacks.
 fn generate_moves_vec(moves_def: &[String]) -> Vec<Move> {
+    lazy_static! {
+        static ref MOVE_DECODER_REGEX: Regex = Regex::new(r"\D*(\d*)\D*(\d*)\D*(\d*)").unwrap();
+    }
     moves_def
         .iter()
         .map(|l| {
-            let l_chars: Vec<char> = l.chars().collect();
+            let caps = MOVE_DECODER_REGEX.captures(&l).unwrap();
             Move::new(
-                l_chars[12] as usize - 48,
-                l_chars[17] as usize - 48,
-                l_chars[5] as u32 - 48,
+                caps.get(2).unwrap().as_str().parse().unwrap(),
+                caps.get(3).unwrap().as_str().parse().unwrap(),
+                caps.get(1).unwrap().as_str().parse().unwrap(),
             )
         })
         .collect()
