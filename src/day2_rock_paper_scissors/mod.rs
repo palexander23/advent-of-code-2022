@@ -2,7 +2,7 @@ const DRAW: i32 = 3;
 const WIN: i32 = 6;
 const LOOSE: i32 = 0;
 
-pub fn process_data(data_lines: Vec<String>) -> (i32, i32) {
+pub fn process_data(data_lines: Vec<String>) -> (String, String) {
     let mut part_1_total_score = 0i32;
     let mut part_2_total_score = 0i32;
 
@@ -80,5 +80,8 @@ pub fn process_data(data_lines: Vec<String>) -> (i32, i32) {
         }
     }
 
-    (part_1_total_score, part_2_total_score)
+    (
+        part_1_total_score.to_string(),
+        part_2_total_score.to_string(),
+    )
 }
