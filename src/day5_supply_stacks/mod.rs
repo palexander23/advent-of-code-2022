@@ -42,7 +42,7 @@ pub fn process_data(data_lines: Vec<String>) -> (String, String) {
     let mut stacks_vec = generate_stacks_vec(stack_def);
     let moves_vec = generate_moves_vec(moves_def);
 
-    // Run the the process
+    // Run the the part 1 process
     for m in moves_vec {
         for _ in 0..m.crates {
             if let Some(c) = stacks_vec[m.origin - 1].pop() {
@@ -59,7 +59,38 @@ pub fn process_data(data_lines: Vec<String>) -> (String, String) {
 
     let part1_output_str: String = part1_output_vec.into_iter().collect();
 
-    (part1_output_str, "0".to_string())
+    // Part 2
+    // Reset the stacks and moves vec
+    let mut stacks_vec = generate_stacks_vec(stack_def);
+    let moves_vec = generate_moves_vec(moves_def);
+
+    // Run the the part 2 process
+    for m in moves_vec {
+        let mut moved_crates: Vec<char> = vec![];
+
+        // Pick up all the crates to be moved
+        for _ in 0..m.crates {
+            if let Some(c) = stacks_vec[m.origin - 1].pop() {
+                moved_crates.push(c)
+            }
+        }
+        // Reverse them
+        moved_crates.reverse();
+
+        // Place them on the destination stack
+        for c in moved_crates {
+            stacks_vec[m.target - 1].push(c)
+        }
+    }
+    // Collect the outputs
+    let mut part2_output_vec = vec![];
+    for stack in stacks_vec {
+        part2_output_vec.push(stack[stack.len() - 1]);
+    }
+
+    let part2_output_str: String = part2_output_vec.into_iter().collect();
+
+    (part1_output_str, part2_output_str)
 }
 
 /// Generate the vectors defining the stack of crates.
