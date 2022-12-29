@@ -5,6 +5,7 @@ mod day2_rock_paper_scissors;
 mod day3_rucksack_reorganization;
 mod day4_camp_cleanup;
 mod day5_supply_stacks;
+mod day6_tuning_trouble;
 
 fn main() {
     run_puzzle_script(
@@ -35,5 +36,17 @@ fn main() {
         day5_supply_stacks::process_data,
         ("CMZ".to_string(), "MCD".to_string()),
         "day5_supply_stacks".to_string(),
+    );
+
+    run_puzzle_script(
+        day5_supply_stacks::process_data,
+        ("CMZ".to_string(), "MCD".to_string()),
+        "day5_supply_stacks".to_string(),
+    );
+
+    run_puzzle_script(
+        day6_tuning_trouble::process_data,
+        ("5".to_string(), "0".to_string()),
+        "day6_tuning_trouble".to_string(),
     );
 }
