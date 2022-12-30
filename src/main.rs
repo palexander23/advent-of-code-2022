@@ -46,7 +46,7 @@ fn main() {
 
     run_puzzle_script(
         day6_tuning_trouble::process_data,
-        ("5".to_string(), "0".to_string()),
+        ("5".to_string(), "23".to_string()),
         "day6_tuning_trouble".to_string(),
     );
 }
